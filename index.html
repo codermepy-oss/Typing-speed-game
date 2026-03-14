@@ -1,14 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Typing Speed Test</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+body{
+font-family: Arial, sans-serif;
+background:#121212;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:#1e1e1e;
+padding:25px;
+border-radius:10px;
+}
+
+button{
+padding:10px 20px;
+margin:10px;
+border:none;
+border-radius:6px;
+background:#4CAF50;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#45a049;
+}
+
+textarea{
+width:100%;
+height:120px;
+margin-top:15px;
+padding:10px;
+font-size:16px;
+border-radius:6px;
+border:none;
+}
+
+#textDisplay{
+margin-top:20px;
+font-size:18px;
+line-height:1.5;
+}
+
+#timer{
+font-size:22px;
+font-weight:bold;
+}
+
+#message{
+margin-top:20px;
+font-size:20px;
+color:#00e676;
+font-weight:bold;
+}
+</style>
 
 </head>
 
@@ -18,54 +76,25 @@
 
 <h1>Typing Speed Test</h1>
 
-<p class="instructions">Press Start and type the sentence</p>
+<p>Timer: <span id="timer">0</span> seconds</p>
 
-<div id="sentence"></div>
+<button id="startBtn">Start Test</button>
+<button id="endBtn">End Test</button>
 
-<textarea id="input" placeholder="Start typing here..." disabled></textarea>
+<p id="textDisplay">
+Click Start Test to begin typing.
+</p>
 
-<div class="stats">
+<textarea 
+id="textInput"
+placeholder="Start typing here..."
+disabled>
+</textarea>
 
-<div class="stat">
-<h3>Time</h3>
-<p id="time">0</p>
-</div>
-
-<div class="stat">
-<h3>WPM</h3>
-<p id="wpm">0</p>
-</div>
-
-<div class="stat">
-<h3>Accuracy</h3>
-<p id="accuracy">100%</p>
-</div>
+<p id="message"></p>
 
 </div>
 
-<div class="buttons">
-
-<button onclick="startGame()">Start</button>
-
-<button onclick="endGame()">End</button>
-
-<button onclick="restartGame()">Restart</button>
-
-</div>
-<div id="resultBox" class="resultBox">
-
-<h2>Test Completed!</h2>
-
-<p>Time Taken: <span id="finalTime"></span> seconds</p>
-
-<p>WPM: <span id="finalWpm"></span></p>
-
-<p>Accuracy: <span id="finalAccuracy"></span></p>
-
-<button onclick="restartGame()">Restart Test</button>
-
-</div>
-</div>
 <script src="script.js"></script>
 
 </body>
