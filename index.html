@@ -1,72 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Typing Speed Test</title>
 
 <link rel="stylesheet" href="style.css">
-
-<style>
-body{
-font-family: Arial, sans-serif;
-background:#121212;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-.container{
-max-width:700px;
-margin:auto;
-background:#1e1e1e;
-padding:25px;
-border-radius:10px;
-}
-
-button{
-padding:10px 20px;
-margin:10px;
-border:none;
-border-radius:6px;
-background:#4CAF50;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-button:hover{
-background:#45a049;
-}
-
-textarea{
-width:100%;
-height:120px;
-margin-top:15px;
-padding:10px;
-font-size:16px;
-border-radius:6px;
-border:none;
-}
-
-#textDisplay{
-margin-top:20px;
-font-size:18px;
-line-height:1.5;
-}
-
-#timer{
-font-size:22px;
-font-weight:bold;
-}
-
-#message{
-margin-top:20px;
-font-size:20px;
-color:#00e676;
-font-weight:bold;
-}
-</style>
 
 </head>
 
@@ -76,22 +16,22 @@ font-weight:bold;
 
 <h1>Typing Speed Test</h1>
 
-<p>Timer: <span id="timer">0</span> seconds</p>
+<p class="timer">Time: <span id="timer">0</span> sec</p>
 
-<button id="startBtn">Start Test</button>
-<button id="endBtn">End Test</button>
+<div id="sentence"></div>
 
-<p id="textDisplay">
-Click Start Test to begin typing.
-</p>
+<textarea id="input" placeholder="Start typing here..." disabled></textarea>
 
-<textarea 
-id="textInput"
-placeholder="Start typing here..."
-disabled>
-</textarea>
+<div class="buttons">
+<button id="startBtn">Start</button>
+<button id="endBtn">End</button>
+<button id="restartBtn">Restart</button>
+</div>
 
-<p id="message"></p>
+<div class="results">
+<p>WPM: <span id="wpm">0</span></p>
+<p>Accuracy: <span id="accuracy">0</span>%</p>
+</div>
 
 </div>
 
