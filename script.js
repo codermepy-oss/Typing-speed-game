@@ -1,54 +1,153 @@
-let startBtn = document.getElementById("startBtn");
-let endBtn = document.getElementById("endBtn");
-let textDisplay = document.getElementById("textDisplay");
-let textInput = document.getElementById("textInput");
-let timerDisplay = document.getElementById("timer");
-let message = document.getElementById("message");
+let sentenceDisplay = document.getElementById("sentence")
+let inputField = document.getElementById("input")
+let timerDisplay = document.getElementById("timer")
+let wpmDisplay = document.getElementById("wpm")
+let accuracyDisplay = document.getElementById("accuracy")
 
-let timer = 0;
-let interval = null;
-let isTyping = false;
+let startBtn = document.getElementById("startBtn")
+let endBtn = document.getElementById("endBtn")
+let restartBtn = document.getElementById("restartBtn")
+
+let timer = 0
+let interval = null
+let sentence = ""
+let started = false
 
 const sentences = [
-"Typing regularly improves speed and accuracy.",
-"Practice typing daily to become faster.",
-"Consistency is the key to mastering typing.",
-"Focus on accuracy before increasing speed.",
-"Typing games help develop muscle memory."
-];
+"Typing practice improves speed and accuracy",
+"Practice every day to become a faster typist",
+"Consistency is the secret to improvement",
+"Focus on accuracy before speed",
+"Typing games help develop muscle memory"
+]
 
-function getRandomSentence() {
-    return sentences[Math.floor(Math.random() * sentences.length)];
+function loadSentence(){
+
+sentence = sentences[Math.floor(Math.random()*sentences.length)]
+
+sentenceDisplay.innerHTML=""
+
+sentence.split("").forEach(letter=>{
+let span=document.createElement("span")
+span.innerText=letter
+sentenceDisplay.appendChild(span)
+})
+
 }
 
-function startTest() {
-    textDisplay.textContent = getRandomSentence();
-    textInput.value = "";
-    textInput.disabled = false;
-    textInput.focus();
+function startTest(){
 
-    timer = 0;
-    timerDisplay.textContent = timer;
+loadSentence()
 
-    message.textContent = "";
+inputField.disabled=false
+inputField.value=""
+inputField.focus()
 
-    isTyping = true;
+timer=0
+timerDisplay.innerText=timer
 
-    interval = setInterval(function () {
-        timer++;
-        timerDisplay.textContent = timer;
-    }, 1000);
+wpmDisplay.innerText=0
+accuracyDisplay.innerText=0
+
+started=true
+
+interval=setInterval(()=>{
+timer++
+timerDisplay.innerText=timer
+},1000)
+
 }
 
-function endTest() {
-    if (!isTyping) return;
+function endTest(){
 
-    clearInterval(interval);
-    isTyping = false;
-    textInput.disabled = true;
+clearInterval(interval)
+inputField.disabled=true
 
-    message.textContent = "Test Completed!";
+calculateResults()
+
 }
 
-startBtn.addEventListener("click", startTest);
-endBtn.addEventListener("click", endTest);
+function restartTest(){
+
+clearInterval(interval)
+
+timer=0
+timerDisplay.innerText=0
+
+inputField.value=""
+inputField.disabled=true
+
+wpmDisplay.innerText=0
+accuracyDisplay.innerText=0
+
+sentenceDisplay.innerHTML=""
+
+started=false
+
+}
+
+function calculateResults(){
+
+let typed=inputField.value.trim()
+
+let words=typed.split(" ").length
+
+let minutes=timer/60
+
+let wpm=Math.round(words/minutes)
+
+if(!isFinite(wpm)) wpm=0
+
+let correct=0
+
+for(let i=0;i<typed.length;i++){
+
+if(typed[i]===sentence[i]){
+correct++
+}
+
+}
+
+let accuracy=Math.round((correct/sentence.length)*100)
+
+wpmDisplay.innerText=wpm
+accuracyDisplay.innerText=accuracy
+
+}
+
+inputField.addEventListener("input",()=>{
+
+let characters=sentenceDisplay.querySelectorAll("span")
+
+let typed=inputField.value.split("")
+
+characters.forEach((char,index)=>{
+
+if(typed[index]==null){
+
+char.classList.remove("correct")
+char.classList.remove("incorrect")
+
+}
+
+else if(typed[index]===char.innerText){
+
+char.classList.add("correct")
+char.classList.remove("incorrect")
+
+}
+
+else{
+
+char.classList.add("incorrect")
+char.classList.remove("correct")
+
+}
+
+})
+
+})
+
+startBtn.addEventListener("click",startTest)
+endBtn.addEventListener("click",endTest)
+restartBtn.addEventListener("click",restartTest)
