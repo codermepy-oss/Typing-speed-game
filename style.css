@@ -18,21 +18,13 @@ max-width:700px;
 text-align:center;
 }
 
-h1{
-margin-bottom:10px;
-}
-
-.timer{
-font-size:18px;
-margin-bottom:15px;
-}
-
 #sentence{
 background:#2c2c2c;
 padding:15px;
 border-radius:6px;
 font-size:18px;
 min-height:60px;
+margin-top:10px;
 }
 
 textarea{
@@ -44,10 +36,6 @@ font-size:16px;
 border-radius:6px;
 border:none;
 outline:none;
-}
-
-.buttons{
-margin-top:15px;
 }
 
 button{
@@ -76,4 +64,10 @@ color:#00e676;
 
 .incorrect{
 color:#ff5252;
+}
+
+#message{
+margin-top:10px;
+font-weight:bold;
+color:#00e676;
 }
