@@ -2,37 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="bubbles">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-<div class="navbar">
-    <h2 id="welcome"></h2>
-    <button onclick="toggleMode()">🌙</button>
-</div>
 
 <div class="dashboard">
 
-    <div class="card">
-        <h3>🔥 Streak</h3>
-        <p id="streak">0</p>
+    <div class="top-bar">
+        <h2 id="welcome"></h2>
+        <button onclick="toggleTheme()">🌗</button>
     </div>
 
-    <div class="card">
-        <h3>🎯 Daily Goal</h3>
-        <p id="goalDisplay"></p>
-    </div>
+    <div class="cards">
 
-    <div class="card">
-        <h3>✨ Motivation</h3>
-        <p id="quote"></p>
+        <div class="card">
+            <h3>🔥 Streak</h3>
+            <p id="streak">0 days</p>
+        </div>
+
+        <div class="card">
+            <h3>🎯 Goal</h3>
+            <p id="goalDisplay"></p>
+        </div>
+
+        <div class="card">
+            <h3>💡 Motivation</h3>
+            <p id="quote"></p>
+        </div>
+
     </div>
 
     <button class="start-btn" onclick="startPractice()">Start Today's Practice</button>
