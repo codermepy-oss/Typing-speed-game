@@ -1,3 +1,9 @@
+function startApp() {
+  const goal = document.getElementById("goal-select").value;
+  localStorage.setItem("dailyGoal", goal);
+
+  document.getElementById("goal-screen").style.display = "none";
+}
 let sentenceDisplay = document.getElementById("sentence")
 let inputField = document.getElementById("input")
 let timerDisplay = document.getElementById("timer")
