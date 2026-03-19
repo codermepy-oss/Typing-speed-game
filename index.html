@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Typing Speed Test</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Typing Speed App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+  <div class="container">
+    <h1>Typing Speed Trainer</h1>
 
-<h1>Typing Speed Test</h1>
+    <div class="stats">
+      <p>WPM: <span id="wpm">0</span></p>
+      <p>Accuracy: <span id="accuracy">100%</span></p>
+      <p>Streak: <span id="streak">0</span></p>
+      <p>Time Left: <span id="timer">0</span>s</p>
+    </div>
 
-<p class="timer">Time: <span id="timer">0</span> sec</p>
-<div id="goal-screen">
-  <h2>Set Your Daily Typing Goal ⌨️</h2>
-  
-  <select id="goal-select">
-    <option value="10">10 minutes</option>
-    <option value="20">20 minutes</option>
-    <option value="30">30 minutes</option>
-  </select>
-  <br><br>
-  <button onclick="startApp()">Start Practice</button>
-</div>
-<div id="streak-display">🔥 Streak: 0</div>
-<div id="typing-area" style="display: none;">
-<div id="sentence"></div>
+    <div class="sentence-box">
+      <p id="sentence">Click Start to begin...</p>
+    </div>
 
-<textarea id="input" placeholder="Start typing here..." disabled></textarea>
+    <textarea 
+      id="input" 
+      placeholder="Start typing here..." 
+      oninput="handleTyping()"
+      disabled
+    ></textarea>
 
-<div class="buttons">
-<button id="startBtn">Start</button>
-<button id="endBtn">End</button>
-<button id="restartBtn">Restart</button>
-</div>
-</div>
-<div class="results">
-<p>WPM: <span id="wpm">0</span></p>
-<p>Accuracy: <span id="accuracy">0</span>%</p>
-<p id="message"></p>
-</div>
+    <div class="buttons">
+      <button onclick="startApp(); enableTyping()">Start</button>
+      <button onclick="restartApp()">Restart</button>
+    </div>
+  </div>
 
-</div>
+  <script src="script.js"></script>
 
-<script src="script.js"></script>
+  <script>
+    function enableTyping() {
+      document.getElementById("input").disabled = false;
+      document.getElementById("input").focus();
+    }
+  </script>
 
 </body>
 </html>
