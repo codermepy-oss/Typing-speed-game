@@ -6,28 +6,48 @@
 <title>Practice</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-<div class="practice-container">
+<body class="dark">
 
-    <div class="stats">
-        <span>⏱ <span id="time">0</span>s</span>
-        <span>⚡ WPM: <span id="wpm">0</span></span>
-        <span>🎯 Accuracy: <span id="accuracy">100</span>%</span>
-    </div>
+<div class="container">
 
-    <div id="sentence" class="sentence"></div>
+<header>
+    <h2>⌨️ Practice</h2>
+    <button onclick="goBack()">Back</button>
+</header>
 
-    <input type="text" id="input" placeholder="Start typing..." autofocus>
+<div class="practice-box">
 
-    <div id="progress"></div>
+<!-- STATS TOP -->
+<div class="stats">
+    <div>⚡ WPM<br><b id="wpm">0</b></div>
+    <div>🎯 Accuracy<br><b id="accuracy">100</b>%</div>
+    <div>📝 Done<br><b id="done">0</b></div>
+</div>
+
+<!-- SENTENCE -->
+<div id="sentence" class="sentence"></div>
+
+<!-- INPUT -->
+<input id="input" placeholder="Type and press Enter..."
+onkeydown="handleKey(event)">
+
+<!-- PROGRESS -->
+<div class="progress">
+    <div id="progressBar"></div>
+</div>
 
 </div>
 
+</div>
+
+<!-- POPUP -->
 <div id="popup" class="popup hidden">
-    <h2>🎉 Goal Completed!</h2>
-    <p>Great job! Come back tomorrow 🔥</p>
-    <button onclick="goDashboard()">Back</button>
+    <div class="popup-box">
+        <h2>🔥 Well Done</h2>
+        <p>You completed today’s goal</p>
+        <button onclick="closePopup()">Back</button>
+    </div>
 </div>
 
 <script src="script.js"></script>
