@@ -1,56 +1,50 @@
-// --- CONFIGURATION & DATA ---
 const typingLibrary = [
-    "The futuristic city was bathed in a neon green glow from the towering glass skyscrapers.",
-    "Mastering touch typing is like learning a musical instrument for your fingertips.",
-    "A quick brown fox jumps over the lazy dog while the sun sets on the horizon.",
-    "Glassmorphism combines frosted glass effects with vibrant colors for a modern UI.",
-    "Artificial intelligence is transforming the way we interact with digital interfaces.",
-    "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-    "The harmony of yellow and green shades creates a refreshing visual experience."
+    "The futuristic interface glowed with a soft green light against the dark room.",
+    "A journey of a thousand miles begins with a single step and a focused mind.",
+    "Mastering the keyboard requires both speed and precision in every single stroke.",
+    "The golden sun dipped below the horizon, painting the sky in shades of yellow.",
+    "Responsive web design ensures that your website looks great on all devices."
 ];
 
-let startTime, timerInterval;
-let isTestRunning = false;
-const keySound = document.getElementById('key-sound');
-const successSound = document.getElementById('success-sound');
+let startTime, timerInterval, isTestRunning = false;
+const body = document.body;
+const themeBtn = document.getElementById('theme-toggle');
 
-// --- INITIALIZATION ---
-function init() {
-    createBubbles();
-    loadHighScore();
-}
+// Theme Toggle Logic
+themeBtn.addEventListener('click', () => {
+    if (body.classList.contains('dark-mode')) {
+        body.classList.replace('dark-mode', 'light-mode');
+        themeBtn.innerText = "🌙 Dark Mode";
+    } else {
+        body.classList.replace('light-mode', 'dark-mode');
+        themeBtn.innerText = "☀️ Light Mode";
+    }
+});
 
 function createBubbles() {
     const container = document.getElementById('bubbles');
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 15; i++) {
         const b = document.createElement('div');
         b.className = 'bubble';
-        const size = Math.random() * 80 + 20 + 'px';
+        const size = Math.random() * 60 + 20 + 'px';
         b.style.width = size; b.style.height = size;
         b.style.left = Math.random() * 100 + 'vw';
-        b.style.animationDuration = (Math.random() * 10 + 8) + 's';
+        b.style.animationDuration = (Math.random() * 8 + 7) + 's';
         b.style.animationDelay = Math.random() * 5 + 's';
         container.appendChild(b);
     }
 }
 
-// --- NAVIGATION ---
 function navigateTo(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
-    if (pageId === 'practice') startNewSession();
+    if (pageId === 'practice') startSession();
 }
 
-// --- TYPING CORE LOGIC ---
-function startNewSession() {
+function startSession() {
     resetStats();
-    // Simulate "AI Generation" by picking a random complex sentence
-    const randomSentence = typingLibrary[Math.floor(Math.random() * typingLibrary.length)];
-    const display = document.getElementById('text-display');
-    
-    // Wrap every character in a span for individual highlighting
-    display.innerHTML = randomSentence.split('').map(char => `<span>${char}</span>`).join('');
-    
+    const sentence = typingLibrary[Math.floor(Math.random() * typingLibrary.length)];
+    document.getElementById('text-display').innerHTML = sentence.split('').map(c => `<span>${c}</span>`).join('');
     const input = document.getElementById('typing-input');
     input.value = "";
     input.focus();
@@ -59,80 +53,52 @@ function startNewSession() {
 document.getElementById('typing-input').addEventListener('input', (e) => {
     if (!isTestRunning) startTimer();
     
-    // Play sound
+    // Play Sound
+    const keySound = document.getElementById('key-sound');
     keySound.currentTime = 0;
-    keySound.volume = 0.3;
+    keySound.volume = 0.2;
     keySound.play();
 
     const inputVal = e.target.value;
-    const inputChars = inputVal.split('');
-    const spanNodes = document.getElementById('text-display').querySelectorAll('span');
+    const spans = document.getElementById('text-display').querySelectorAll('span');
     let errors = 0;
 
-    spanNodes.forEach((span, i) => {
-        const char = inputChars[i];
-        if (char == null) {
-            span.className = ''; // Not typed yet
-        } else if (char === span.innerText) {
-            span.className = 'correct'; // Green highlight
-        } else {
-            span.className = 'incorrect'; // Red highlight
-            errors++;
-        }
+    spans.forEach((span, i) => {
+        if (inputVal[i] == null) span.className = '';
+        else if (inputVal[i] === span.innerText) span.className = 'correct';
+        else { span.className = 'incorrect'; errors++; }
     });
 
-    // Real-time Accuracy
-    const accuracy = inputChars.length > 0 
-        ? Math.max(0, Math.floor(((inputChars.length - errors) / inputChars.length) * 100)) 
-        : 100;
+    const accuracy = inputVal.length > 0 ? Math.max(0, Math.floor(((inputVal.length - errors) / inputVal.length) * 100)) : 100;
     document.getElementById('accuracy').innerText = accuracy;
 
-    // Auto-finish if the sentence is complete
-    if (inputVal === document.getElementById('text-display').innerText) {
-        finishTest();
-    }
+    if (inputVal === document.getElementById('text-display').innerText) finishTest();
 });
 
-// Finish on Enter key too
-document.getElementById('typing-input').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') finishTest();
-});
-
-// --- TIMER & STATS ---
 function startTimer() {
     isTestRunning = true;
     startTime = Date.now();
     timerInterval = setInterval(() => {
         const elapsed = Math.floor((Date.now() - startTime) / 1000);
         document.getElementById('timer').innerText = elapsed;
-        
-        // WPM Calculation
-        const charCount = document.getElementById('typing-input').value.length;
-        const words = charCount / 5;
-        const minutes = elapsed / 60;
-        document.getElementById('wpm').innerText = elapsed > 0 ? Math.floor(words / minutes) : 0;
+        const words = document.getElementById('typing-input').value.length / 5;
+        document.getElementById('wpm').innerText = elapsed > 0 ? Math.floor(words / (elapsed / 60)) : 0;
     }, 1000);
 }
 
 function finishTest() {
     clearInterval(timerInterval);
     isTestRunning = false;
-    successSound.play();
+    document.getElementById('success-sound').play();
 
     const wpm = document.getElementById('wpm').innerText;
     const acc = document.getElementById('accuracy').innerText;
-    const time = document.getElementById('timer').innerText;
-
-    // Save High Score
-    const currentHigh = localStorage.getItem('typemaster_high') || 0;
-    if (parseInt(wpm) > parseInt(currentHigh)) {
-        localStorage.setItem('typemaster_high', wpm);
-    }
+    
+    let feedback = wpm > 60 ? "Lightning Fast! ⚡" : "Great job! Keep it up! 🚀";
 
     document.getElementById('final-results').innerHTML = `
-        <p>Speed: <strong>${wpm} WPM</strong></p>
-        <p>Accuracy: <strong>${acc}%</strong></p>
-        <p>Time: <strong>${time}s</strong></p>
+        <p style="color:var(--accent); font-weight:bold; margin-bottom:10px;">${feedback}</p>
+        <p>Speed: ${wpm} WPM | Accuracy: ${acc}%</p>
     `;
     document.getElementById('modal-overlay').classList.remove('hidden');
 }
@@ -150,10 +116,4 @@ function resetTest() {
     navigateTo('dashboard');
 }
 
-function loadHighScore() {
-    const high = localStorage.getItem('typemaster_high') || 0;
-    console.log("Current High Score:", high);
-}
-
-// Start the app
-init();
+createBubbles();
