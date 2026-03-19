@@ -2,44 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Typing Master - Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeMaster - Login</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="light">
-<div class="bubbles">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
+
 <div class="login-container">
-    <h1>🚀 Typing Master</h1>
+    <h1>⌨️ TypeMaster</h1>
+    <p>Improve your typing daily 🚀</p>
+
     <input type="text" id="username" placeholder="Enter your name">
     
     <select id="goal">
-        <option value="5">5 Questions / Day</option>
-        <option value="10">10 Questions / Day</option>
-        <option value="15">15 Questions / Day</option>
+        <option value="5">5 questions/day</option>
+        <option value="10">10 questions/day</option>
+        <option value="15">15 questions/day</option>
     </select>
 
     <button onclick="login()">Start</button>
+
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 </div>
 
-<script>
-function login(){
-    const name = document.getElementById("username").value;
-    const goal = document.getElementById("goal").value;
-
-    if(name==="") return alert("Enter your name");
-
-    localStorage.setItem("user", name);
-    localStorage.setItem("goal", goal);
-    localStorage.setItem("completedToday", 0);
-
-    window.location.href = "dashboard.html";
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
