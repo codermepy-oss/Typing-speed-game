@@ -65,7 +65,16 @@ margin-bottom:18px;
 font-weight:bold;
 color:#b9e6ff;
 }
+#goal-screen {
+  text-align: center;
+  margin-top: 100px;
+}
 
+#goal-screen select, #goal-screen button {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+}
 /* Sentence display */
 
 #sentence{
