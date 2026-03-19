@@ -2,74 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - TypeMaster</title>
+<title>Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- BUBBLES -->
-<div class="bubble" style="left:10%"></div>
-<div class="bubble" style="left:30%"></div>
-<div class="bubble" style="left:50%"></div>
-<div class="bubble" style="left:70%"></div>
-<div class="bubble" style="left:90%"></div>
-
-<div class="container">
-
-<!-- TOP BAR -->
-<div class="top-bar">
-  <h2 id="welcome"></h2>
-  <span class="toggle" onclick="toggleTheme()">🌓</span>
+<div class="navbar">
+    <h2 id="welcome"></h2>
+    <button onclick="toggleMode()">🌙</button>
 </div>
 
-<!-- STREAK -->
-<div class="card">
-  <div class="flex">
-    <h3>🔥 Streak: <span id="streak">0</span></h3>
-    <span class="icon">🏆</span>
-  </div>
-  <p id="quote"></p>
-</div>
+<div class="dashboard">
 
-<!-- GOAL -->
-<div class="card">
-  <h3>🎯 Daily Goal</h3>
-  <input id="goal" type="number" placeholder="e.g. 10">
-  <button onclick="setGoal()">Save Goal</button>
-</div>
+    <div class="card">
+        <h3>🔥 Streak</h3>
+        <p id="streak">0</p>
+    </div>
 
-<!-- PRACTICE BUTTON -->
-<div class="card">
-  <div class="flex">
-    <h3>🚀 Practice</h3>
-    <span class="icon">⌨️</span>
-  </div>
-  <div class="card">
-  <h3>⚙️ Difficulty</h3>
-  <button onclick="setDifficulty('easy')">Easy</button>
-  <button onclick="setDifficulty('medium')">Medium</button>
-  <button onclick="setDifficulty('hard')">Hard</button>
-</div>
-  <button onclick="startPractice()">Start Practice</button>
-</div>
+    <div class="card">
+        <h3>🎯 Daily Goal</h3>
+        <p id="goalDisplay"></p>
+    </div>
 
-<!-- PRACTICE AREA -->
-<div id="practiceBox" class="card hidden">
-  <h3>⌨️ Practice Mode</h3>
+    <div class="card">
+        <h3>✨ Motivation</h3>
+        <p id="quote"></p>
+    </div>
 
-  <p id="sentence"></p>
-  <input id="input" oninput="checkTyping()">
-
-  <div class="progress">
-    <div id="progressBar" class="progress-bar"></div>
-  </div>
-
-  <p>⚡ WPM: <span id="wpm">0</span> | 🎯 Accuracy: <span id="accuracy">100</span>%</p>
-
-  <button onclick="backToDashboard()">Back</button>
-</div>
+    <button class="start-btn" onclick="startPractice()">Start Today's Practice</button>
 
 </div>
 
