@@ -1,20 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Login</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeMaster | Speed Test</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+<body class="dark-mode">
+    <div class="bubble-container" id="bubbles"></div>
 
-<body class="dark">
+    <audio id="key-sound" src="https://www.soundjay.com/communication/typewriter-key-1.mp3"></audio>
+    <audio id="success-sound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
 
-<div class="center">
-    <div class="card">
-        <h1>⌨️ TypeMaster</h1>
-        <input id="username" placeholder="Enter your name">
-        <button onclick="login()">Start</button>
+    <nav class="glass-nav">
+        <div class="logo">TypeMaster ⚡</div>
+        <button id="theme-toggle" class="glass-button">🌓 Switch Theme</button>
+    </nav>
+
+    <main id="dashboard" class="page active">
+        <div class="glass-card hero-tile">
+            <h1>TypeMaster</h1>
+            <p>Master your keystrokes in a world of glass.</p>
+            <div class="emoji-container">
+                <span class="floating-emoji">🚀</span>
+                <span class="floating-emoji">⌨️</span>
+                <span class="floating-emoji">🔥</span>
+            </div>
+            <button class="btn-main" onclick="navigateTo('practice')">Start Practicing</button>
+        </div>
+    </main>
+
+    <main id="practice" class="page">
+        <div class="practice-container">
+            <div class="stats-bar">
+                <div class="glass-card stat-item">Time: <span id="timer">0</span>s</div>
+                <div class="glass-card stat-item">WPM: <span id="wpm">0</span></div>
+                <div class="glass-card stat-item">Accuracy: <span id="accuracy">100</span>%</div>
+            </div>
+
+            <div class="glass-card typing-area">
+                <div id="text-display" class="sentence-display"></div>
+                <input type="text" id="typing-input" placeholder="Type the sentence above and press Enter..." autocomplete="off">
+            </div>
+            
+            <button class="btn-outline" onclick="navigateTo('dashboard')">Back to Dashboard</button>
+        </div>
+    </main>
+
+    <div id="modal-overlay" class="modal hidden">
+        <div class="glass-card modal-box">
+            <h2>Test Completed! 🎊</h2>
+            <div id="final-results"></div>
+            <button class="btn-main" onclick="resetTest()">Try Again</button>
+        </div>
     </div>
-</div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
