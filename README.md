@@ -1,5 +1,31 @@
-# Typing-speed-game
-This is my first project and it's a basic typing speed game which calculates WPM and accuracy in real time with start, end and restart options...It also includes responsive design
+Typing Habit Builder - TYPE-FLOW
 
-The link to the website is given below : 
- https://codermepy-oss.github.io/Typing-speed-game/
+A web app that helps users improve typing speed while building a daily practice habit through streaks and progress tracking.
+
+ Features
+
+* Typing speed test (WPM & Accuracy)
+* Daily goal setting
+* Streak tracking 🔥
+* Progress dashboard
+* Clean and interactive UI
+
+Tech Stack
+
+* HTML
+* CSS
+* JavaScript
+
+Screenshots
+
+(Add images here later)
+
+ Live Demo
+
+(Add GitHub Pages link later)
+
+ Future Improvements
+
+* Notifications
+* Leaderboard
+* User login system
