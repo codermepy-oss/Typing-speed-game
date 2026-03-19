@@ -1,31 +1,65 @@
-const sentences = [
+let sentences = [
 "The quick brown fox jumps over the lazy dog",
-"Typing fast requires consistent practice",
-"Discipline beats motivation every time",
-"Small progress leads to big results",
-"Focus on improvement not perfection",
-"Consistency is the key to mastery",
-"Push yourself a little more each day",
-"Speed comes with accuracy and practice"
+"Practice typing daily to improve speed",
+"Consistency builds strong skills",
+"Never stop learning new things",
+"Push yourself to improve everyday"
 ];
 
 let current = "";
-let goal = 5;
 let done = 0;
+let goal = 5;
 
 let totalChars = 0;
 let correctChars = 0;
-
 let startTime;
 
-// LOAD PRACTICE
-if (document.getElementById("sentence")) {
-    goal = parseInt(localStorage.getItem("goal") || 5);
-    done = 0;
-    loadSentence();
+// LOGIN
+function login() {
+    let name = document.getElementById("username").value;
+    localStorage.setItem("user", name);
+    window.location.href = "dashboard.html";
 }
 
-// NEW SENTENCE
+// LOAD
+window.onload = function () {
+
+    if (document.getElementById("welcome")) {
+        document.getElementById("welcome").innerText =
+            "Hi, " + localStorage.getItem("user");
+
+        document.getElementById("streak").innerText =
+            (localStorage.getItem("streak") || 0) + " days";
+
+        showQuote();
+    }
+
+    if (document.getElementById("sentence")) {
+        goal = parseInt(localStorage.getItem("goal") || 5);
+        loadSentence();
+
+        document.getElementById("input").addEventListener("keydown", function(e){
+            if (e.key === "Enter") evaluate();
+        });
+    }
+};
+
+// GOAL
+function saveGoal() {
+    let g = document.getElementById("goal").value;
+    localStorage.setItem("goal", g);
+}
+
+// NAV
+function startPractice() {
+    window.location.href = "practice.html";
+}
+
+function goBack() {
+    window.location.href = "dashboard.html";
+}
+
+// SENTENCE
 function loadSentence() {
     current = sentences[Math.floor(Math.random() * sentences.length)];
     document.getElementById("sentence").innerText = current;
@@ -33,19 +67,11 @@ function loadSentence() {
     startTime = new Date();
 }
 
-// ENTER KEY LOGIC
-function handleKey(e) {
-    if (e.key === "Enter") {
-        evaluate();
-    }
-}
-
-// EVALUATE INPUT
+// EVALUATE
 function evaluate() {
     let input = document.getElementById("input").value;
 
     let correct = 0;
-
     for (let i = 0; i < input.length; i++) {
         if (input[i] === current[i]) correct++;
     }
@@ -56,7 +82,16 @@ function evaluate() {
     done++;
     document.getElementById("done").innerText = done;
 
-    updateStats(input.length);
+    let time = (new Date() - startTime) / 1000;
+
+    let wpm = Math.round((input.length / 5) / (time / 60));
+    document.getElementById("wpm").innerText = wpm || 0;
+
+    let acc = Math.round((correctChars / totalChars) * 100) || 100;
+    document.getElementById("accuracy").innerText = acc;
+
+    document.getElementById("bar").style.width =
+        (done / goal) * 100 + "%";
 
     if (done >= goal) {
         updateStreak();
@@ -64,29 +99,6 @@ function evaluate() {
     } else {
         loadSentence();
     }
-}
-
-// UPDATE STATS
-function updateStats(charsTyped) {
-    let time = (new Date() - startTime) / 1000;
-
-    let wpm = Math.round((charsTyped / 5) / (time / 60));
-    document.getElementById("wpm").innerText = wpm || 0;
-
-    let accuracy = Math.round((correctChars / totalChars) * 100) || 100;
-    document.getElementById("accuracy").innerText = accuracy;
-
-    let progress = (done / goal) * 100;
-    document.getElementById("progressBar").style.width = progress + "%";
-}
-
-// NAV
-function goBack() {
-    window.location.href = "dashboard.html";
-}
-
-function closePopup() {
-    window.location.href = "dashboard.html";
 }
 
 // STREAK
@@ -99,4 +111,17 @@ function updateStreak() {
         localStorage.setItem("streak", streak + 1);
         localStorage.setItem("last", today);
     }
+}
+
+// QUOTE
+function showQuote() {
+    let quotes = [
+        "Small progress every day leads to big results.",
+        "Consistency is more important than motivation.",
+        "Discipline builds success.",
+        "Focus on improvement."
+    ];
+
+    document.getElementById("quote").innerText =
+        quotes[Math.floor(Math.random() * quotes.length)];
 }
