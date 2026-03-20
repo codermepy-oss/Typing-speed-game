@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeMaster | Glassmorphism Edition</title>
+    <title>TypeMaster | Glass Edition</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
@@ -18,15 +18,18 @@
     </nav>
 
     <main id="dashboard" class="page active">
-        <div class="glass-card hero-tile">
-            <h1>TypeMaster</h1>
-            <p>Elevate your speed with a frosted glass experience.</p>
-            <div class="emoji-container">
-                <span class="floating-emoji">🚀</span>
-                <span class="floating-emoji">⌨️</span>
+        <section class="hero-container">
+            <div class="glass-card hero-card">
+                <span class="badge">V2.0 Glassmorphism</span>
+                <h1>TypeMaster</h1>
+                <p>Test your limits with our high-precision real-time engine.</p>
+                <div class="hero-stats-preview">
+                    <span>⚡ Real-time Accuracy</span>
+                    <span>🎯 Precision Tracking</span>
+                </div>
+                <button class="btn-primary" onclick="navigateTo('practice')">Start Practice</button>
             </div>
-            <button class="btn-primary" onclick="navigateTo('practice')">Start Practice</button>
-        </div>
+        </section>
     </main>
 
     <main id="practice" class="page">
@@ -49,7 +52,7 @@
             <div class="glass-card main-typing-box">
                 <div id="text-display" class="sentence-display"></div>
                 <div class="input-wrapper">
-                    <input type="text" id="typing-input" placeholder="Type the text above..." autocomplete="off">
+                    <input type="text" id="typing-input" placeholder="Type and hit Enter to finish early..." autocomplete="off">
                 </div>
             </div>
             
@@ -61,7 +64,7 @@
         <div class="glass-card modal-box">
             <div class="modal-header">
                 <span class="emoji-lg">🎊</span>
-                <h2>Results</h2>
+                <h2>Performance Report</h2>
             </div>
             <div id="final-results" class="results-content"></div>
             <div class="modal-footer">
