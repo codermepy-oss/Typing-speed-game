@@ -1,8 +1,8 @@
 const sentences = [
+    "Modern web interfaces prioritize beauty as much as functionality.",
     "The best way to predict the future is to create it.",
     "Precision is the key to mastering the art of typing fast.",
     "The glowing interface responded instantly to every keystroke.",
-    "Success is the courage to continue when things get difficult.",
     "Mastering your flow is the secret to peak productivity.",
     "A journey of a thousand miles begins with a single step.",
     "Learning to type quickly requires focus and regular practice.",
@@ -38,6 +38,7 @@ function navigateTo(id) {
     if (modal) modal.classList.add('hidden');
     
     if (id === 'practice') startTest();
+    else resetStats();
 }
 
 function startTest() {
@@ -50,7 +51,7 @@ function startTest() {
     const input = document.getElementById('typing-input');
     if (input) {
         input.value = "";
-        input.focus();
+        setTimeout(() => input.focus(), 100);
     }
 }
 
@@ -59,41 +60,26 @@ if (typingInput) {
     typingInput.addEventListener('input', (e) => {
         if (!isRunning) startTimer();
         
+        // Play click sound
         const snd = document.getElementById('key-sound');
-        if (snd) {
-            snd.currentTime = 0;
-            snd.volume = 0.2;
-            snd.play().catch(() => {}); // Catch block prevents console errors if sound fails
-        }
+        if (snd) { snd.currentTime = 0; snd.volume = 0.2; snd.play().catch(()=>{}); }
 
         const val = e.target.value;
         const display = document.getElementById('text-display');
-        if (!display) return;
-        
         const spans = display.querySelectorAll('span');
         let errs = 0;
 
         spans.forEach((span, i) => {
             const char = val[i];
-            if (char == null) {
-                span.className = '';
-            } else if (char === span.innerText) {
-                span.className = 'correct';
-            } else {
-                span.className = 'incorrect';
-                errs++;
-            }
+            if (char == null) span.className = '';
+            else if (char === span.innerText) span.className = 'correct';
+            else { span.className = 'incorrect'; errs++; }
         });
 
         const accuracy = val.length > 0 ? Math.max(0, Math.floor(((val.length - errs) / val.length) * 100)) : 100;
-        const accDisplay = document.getElementById('accuracy');
-        if (accDisplay) accDisplay.innerText = accuracy;
+        document.getElementById('accuracy').innerText = accuracy;
         
         if (val === display.innerText) finish();
-    });
-
-    typingInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && isRunning) finish();
     });
 }
 
@@ -102,15 +88,10 @@ function startTimer() {
     startTime = Date.now();
     timer = setInterval(() => {
         const sec = Math.floor((Date.now() - startTime) / 1000);
-        const timerDisplay = document.getElementById('timer');
-        if (timerDisplay) timerDisplay.innerText = sec;
-        
+        document.getElementById('timer').innerText = sec;
         const input = document.getElementById('typing-input');
-        const wpmDisplay = document.getElementById('wpm');
-        if (input && wpmDisplay) {
-            const wpm = sec > 0 ? Math.floor((input.value.length / 5) / (sec / 60)) : 0;
-            wpmDisplay.innerText = wpm;
-        }
+        const wpm = sec > 0 ? Math.floor((input.value.length / 5) / (sec / 60)) : 0;
+        document.getElementById('wpm').innerText = wpm;
     }, 1000);
 }
 
@@ -118,45 +99,35 @@ function finish() {
     clearInterval(timer);
     isRunning = false;
 
+    // Success Sound
     const successSnd = document.getElementById('success-sound');
-    if (successSnd) {
-        successSnd.currentTime = 0;
-        successSnd.play().catch(() => {});
-    }
+    if (successSnd) { successSnd.currentTime = 0; successSnd.play().catch(()=>{}); }
     
-    const wpm = document.getElementById('wpm')?.innerText || "0";
-    const acc = document.getElementById('accuracy')?.innerText || "100";
+    const wpm = document.getElementById('wpm').innerText;
+    const acc = document.getElementById('accuracy').innerText;
     
-    const resultsArea = document.getElementById('final-results');
-    if (resultsArea) {
-        resultsArea.innerHTML = `<h3 class="result-wpm">${wpm} WPM</h3><p>Accuracy: ${acc}%</p>`;
-    }
-    
-    const modal = document.getElementById('modal-overlay');
-    if (modal) modal.classList.remove('hidden');
+    document.getElementById('final-results').innerHTML = `<h3 class="result-wpm">${wpm} WPM</h3><p>Accuracy: ${acc}%</p>`;
+    document.getElementById('modal-overlay').classList.remove('hidden');
 }
 
 function resetStats() {
     clearInterval(timer);
     isRunning = false;
-    if (document.getElementById('timer')) document.getElementById('timer').innerText = "0";
-    if (document.getElementById('wpm')) document.getElementById('wpm').innerText = "0";
-    if (document.getElementById('accuracy')) document.getElementById('accuracy').innerText = "100";
+    document.getElementById('timer').innerText = "0";
+    document.getElementById('wpm').innerText = "0";
+    document.getElementById('accuracy').innerText = "100";
 }
 
-function resetTest() {
-    navigateTo('practice');
-}
+function resetTest() { navigateTo('practice'); }
 
-// Generate background bubbles
+// Background Bubbles
 const container = document.getElementById('bubbles');
 if (container) {
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
         const b = document.createElement('div');
         b.className = 'bubble';
-        const s = Math.random() * 60 + 20 + 'px';
-        b.style.width = s;
-        b.style.height = s;
+        const s = Math.random() * 80 + 20 + 'px';
+        b.style.width = s; b.style.height = s;
         b.style.left = Math.random() * 100 + 'vw';
         b.style.top = Math.random() * 100 + 'vh';
         container.appendChild(b);
