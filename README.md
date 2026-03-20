@@ -5,8 +5,6 @@ A web app that helps users improve typing speed while building a daily practice 
  Features
 
 * Typing speed test (WPM & Accuracy)
-* Daily goal setting
-* Streak tracking 🔥
 * Progress dashboard
 * Clean and interactive UI
 
@@ -20,11 +18,7 @@ Screenshots
 
 (Add images here later)
 
-Live Demo :  https://codermepy-oss.github.io/Type-flow/
-
- Live Demo
-
-(Add GitHub Pages link later)
+Live Demo :   https://codermepy-oss.github.io/Type-flow/
 
  Future Improvements
 
