@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypeMaster | Speed Test</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-mode">
+<body>
     <div class="bubble-container" id="bubbles"></div>
 
     <audio id="key-sound" src="https://www.soundjay.com/communication/typewriter-key-1.mp3"></audio>
@@ -14,13 +14,13 @@
 
     <nav class="glass-nav">
         <div class="logo">TypeMaster ⚡</div>
-        <button id="theme-toggle" class="glass-button">🌓 Switch Theme</button>
+        <button id="theme-toggle" class="glass-button">☀️ Light Mode</button>
     </nav>
 
     <main id="dashboard" class="page active">
         <div class="glass-card hero-tile">
             <h1>TypeMaster</h1>
-            <p>Challenge your speed!!!.</p>
+            <p>Elevate your typing speed with glass-styled precision.</p>
             <div class="emoji-container">
                 <span class="floating-emoji">🚀</span>
                 <span class="floating-emoji">⌨️</span>
@@ -40,18 +40,22 @@
 
             <div class="glass-card typing-area">
                 <div id="text-display" class="sentence-display"></div>
-                <input type="text" id="typing-input" placeholder="Type the sentence above and press Enter..." autocomplete="off">
+                <input type="text" id="typing-input" placeholder="Type here and press Enter to finish..." autocomplete="off">
             </div>
             
-            <button class="btn-outline" onclick="navigateTo('dashboard')">Back to Dashboard</button>
+            <button class="btn-outline" onclick="navigateTo('dashboard')">Exit to Dashboard</button>
         </div>
     </main>
 
     <div id="modal-overlay" class="modal hidden">
         <div class="glass-card modal-box">
-            <h2>Test Completed! 🎊</h2>
-            <div id="final-results"></div>
-            <button class="btn-main" onclick="resetTest()">Try Again</button>
+            <span class="emoji-lg">🏆</span>
+            <h2>Test Completed!</h2>
+            <div id="final-results" class="results-grid"></div>
+            <div class="modal-actions">
+                <button class="btn-main" onclick="resetTest()">Try Again</button>
+                <button class="btn-outline" onclick="navigateTo('dashboard')">Back to Dashboard</button>
+            </div>
         </div>
     </div>
 
