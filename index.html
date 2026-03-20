@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TypeFlow | Precision Glass</title>
+    <title>TypeMaster ⚡ | Precision Glass</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
     <div class="bubble-container" id="bubbles"></div>
 
+    <audio id="key-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_731385a430.mp3"></audio>
+    <audio id="success-sound" src="https://cdn.pixabay.com/audio/2021/08/04/audio_0625c1539c.mp3"></audio>
+
     <nav class="glass-nav">
         <div class="nav-content">
             <div class="logo-container">
-                <span class="logo-text">TypeFlow</span>
+                <span class="logo-text">TypeMaster</span>
                 <span class="logo-bolt">⚡</span>
             </div>
             <button id="theme-toggle" class="theme-btn-styled">☀️ Light Mode</button>
@@ -23,8 +26,11 @@
         <main id="dashboard" class="page active">
             <div class="hero-card glass-card">
                 <div class="hero-emoji-top">🚀 ⌨️ 🎯</div>
-                <h1 class="gradient-text">TypeFlow</h1>
-                <button class="btn-primary pulse" onclick="navigateTo('practice')">Start Practice ⚡</button>
+                <p class="hero-sub">Next-Gen Typing</p>
+                <h1 class="hero-title">TypeMaster</h1>
+                <p class="hero-tagline">Elevate your speed!!!</p>
+                <p class="hero-desc">Master the flow and track your precision in real-time. ✨</p>
+                <button class="btn-primary" onclick="navigateTo('practice')">Start Practice ⚡</button>
             </div>
         </main>
 
@@ -32,33 +38,52 @@
             <div class="practice-layout">
                 <div class="stats-grid">
                     <div class="glass-card stat-tile">
+                        <span class="tile-icon">⏱️</span>
                         <span class="label">TIME</span>
                         <span id="timer" class="value">0</span>
                     </div>
                     <div class="glass-card stat-tile">
+                        <span class="tile-icon">🚀</span>
                         <span class="label">WPM</span>
                         <span id="wpm" class="value">0</span>
                     </div>
                     <div class="glass-card stat-tile">
+                        <span class="tile-icon">🎯</span>
                         <span class="label">ACCURACY</span>
-                        <div class="acc-wrapper"><span id="accuracy" class="value">100</span><span class="unit">%</span></div>
+                        <div class="acc-wrapper">
+                            <span id="accuracy" class="value">100</span>
+                            <span class="unit">%</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="glass-card main-typing-box">
                     <div id="text-display" class="sentence-display"></div>
-                    <input type="text" id="typing-input" placeholder="Start typing..." autocomplete="off">
+                    <div class="input-wrapper">
+                        <input type="text" id="typing-input" placeholder="Type and hit Enter to finish..." autocomplete="off">
+                    </div>
                 </div>
                 
                 <div class="exit-container">
-                    <button class="exit-tile hover-glow" onclick="navigateTo('dashboard')">
+                    <button class="exit-tile" onclick="navigateTo('dashboard')">
                         Exit to Dashboard 🏠
                     </button>
                 </div>
             </div>
         </main>
     </div>
-    
+
+    <div id="modal-overlay" class="modal hidden">
+        <div class="glass-card modal-box">
+            <h2>🏆 Results</h2>
+            <div id="final-results"></div>
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="resetTest()">Try Again</button>
+                <button class="btn-primary btn-alt" onclick="navigateTo('dashboard')">Home</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
