@@ -13,20 +13,19 @@
     <audio id="success-sound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
 
     <nav class="glass-nav">
-        <div class="logo">TypeMaster ⚡</div>
+        <div class="logo-container">
+            <span class="logo-text">TypeMaster</span>
+            <span class="logo-bolt">⚡</span>
+        </div>
         <button id="theme-toggle" class="theme-btn-styled">☀️ Light Mode</button>
     </nav>
 
     <main id="dashboard" class="page active">
         <section class="hero-container">
             <div class="glass-card hero-card">
-                <span class="badge">V2.0 Glassmorphism</span>
-                <h1>TypeMaster</h1>
-                <p>Test your limits with our high-precision real-time engine.</p>
-                <div class="hero-stats-preview">
-                    <span>⚡ Real-time Accuracy</span>
-                    <span>🎯 Precision Tracking</span>
-                </div>
+                <span class="badge">Pro Typing Engine</span>
+                <h1>Master Your Speed</h1>
+                <p>High-precision tracking with real-time accuracy feedback.</p>
                 <button class="btn-primary" onclick="navigateTo('practice')">Start Practice</button>
             </div>
         </section>
@@ -35,42 +34,24 @@
     <main id="practice" class="page">
         <div class="practice-container">
             <div class="stats-grid">
-                <div class="glass-card stat-tile">
-                    <span class="label">TIME</span>
-                    <span id="timer" class="value">0</span>
-                </div>
-                <div class="glass-card stat-tile">
-                    <span class="label">WPM</span>
-                    <span id="wpm" class="value">0</span>
-                </div>
-                <div class="glass-card stat-tile">
-                    <span class="label">ACCURACY</span>
-                    <span id="accuracy" class="value">100</span><small>%</small>
-                </div>
+                <div class="glass-card stat-tile"><span class="label">TIME</span><span id="timer" class="value">0</span></div>
+                <div class="glass-card stat-tile"><span class="label">WPM</span><span id="wpm" class="value">0</span></div>
+                <div class="glass-card stat-tile"><span class="label">ACCURACY</span><span id="accuracy" class="value">100</span><small>%</small></div>
             </div>
-
             <div class="glass-card main-typing-box">
                 <div id="text-display" class="sentence-display"></div>
-                <div class="input-wrapper">
-                    <input type="text" id="typing-input" placeholder="Type and hit Enter to finish early..." autocomplete="off">
-                </div>
+                <input type="text" id="typing-input" placeholder="Type here and press Enter to finish..." autocomplete="off">
             </div>
-            
             <button class="btn-ghost" onclick="navigateTo('dashboard')">Exit to Dashboard</button>
         </div>
     </main>
 
     <div id="modal-overlay" class="modal hidden">
         <div class="glass-card modal-box">
-            <div class="modal-header">
-                <span class="emoji-lg">🎊</span>
-                <h2>Performance Report</h2>
-            </div>
+            <h2>🏆 Performance</h2>
             <div id="final-results" class="results-content"></div>
-            <div class="modal-footer">
-                <button class="btn-primary" onclick="resetTest()">Try Again</button>
-                <button class="btn-primary btn-alt" onclick="navigateTo('dashboard')">Dashboard</button>
-            </div>
+            <button class="btn-primary" onclick="resetTest()">Try Again</button>
+            <button class="btn-primary btn-alt" onclick="navigateTo('dashboard')">Back to Dashboard</button>
         </div>
     </div>
 
