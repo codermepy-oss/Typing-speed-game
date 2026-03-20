@@ -2,79 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeMaster | Glass Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TypeFlow | Responsive Edition</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
     <div class="bubble-container" id="bubbles"></div>
 
-    <audio id="key-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_731385a430.mp3"></audio>
-    <audio id="success-sound" src="https://cdn.pixabay.com/audio/2021/08/04/audio_0625c1539c.mp3"></audio>
-
     <nav class="glass-nav">
-        <div class="logo-container">
-            <span class="logo-text">TypeMaster</span>
-            <span class="logo-bolt">⚡</span>
+        <div class="nav-content">
+            <div class="logo-container">
+                <span class="logo-text">TypeFlow</span>
+                <span class="logo-bolt">⚡</span>
+            </div>
+            <button id="theme-toggle" class="theme-btn-styled">☀️ Light</button>
         </div>
-        <button id="theme-toggle" class="theme-btn-styled">☀️ Light Mode</button>
     </nav>
 
-    <main id="dashboard" class="page active">
-        <section class="hero-container">
-            <div class="glass-card hero-card">
+    <div class="main-wrapper">
+        <main id="dashboard" class="page active">
+            <div class="hero-card glass-card">
                 <div class="hero-emoji-top">🚀 ⌨️ 🎯</div>
-                <span class="badge">Next-Gen Typing</span>
-                <h1 class="gradient-text">TypeMaster</h1>
-                <p>Elevate your speed!!! <br><br> Master the flow and track your precision in real-time. ✨</p>
+                <h1 class="gradient-text">TypeFlow</h1>
+                <p class="hero-desc">High-performance typing. <br class="mobile-break"> Master the flow. ✨</p>
                 <button class="btn-primary pulse" onclick="navigateTo('practice')">Start Practice ⚡</button>
             </div>
-        </section>
-    </main>
+        </main>
 
-    <main id="practice" class="page">
-        <div class="practice-container">
-            <div class="stats-grid">
-                <div class="glass-card stat-tile hover-glow">
-                    <span class="tile-icon">⏱️</span>
-                    <span class="label">TIME</span>
-                    <span id="timer" class="value">0</span>
+        <main id="practice" class="page">
+            <div class="practice-layout">
+                <div class="stats-grid">
+                    <div class="glass-card stat-tile hover-glow">
+                        <span class="tile-icon">⏱️</span>
+                        <span class="label">TIME</span>
+                        <span id="timer" class="value">0</span>
+                    </div>
+                    <div class="glass-card stat-tile hover-glow">
+                        <span class="tile-icon">🚀</span>
+                        <span class="label">WPM</span>
+                        <span id="wpm" class="value">0</span>
+                    </div>
+                    <div class="glass-card stat-tile hover-glow">
+                        <span class="tile-icon">🎯</span>
+                        <span class="label">ACC</span>
+                        <span id="accuracy" class="value">100</span>
+                    </div>
                 </div>
-                <div class="glass-card stat-tile hover-glow">
-                    <span class="tile-icon">🚀</span>
-                    <span class="label">WPM</span>
-                    <span id="wpm" class="value">0</span>
+
+                <div class="glass-card main-typing-box">
+                    <div id="text-display" class="sentence-display"></div>
+                    <input type="text" id="typing-input" placeholder="Tap to type..." autocomplete="off">
                 </div>
-                <div class="glass-card stat-tile hover-glow">
-                    <span class="tile-icon">🎯</span>
-                    <span class="label">ACCURACY</span>
-                    <span id="accuracy" class="value">100</span><small>%</small>
+                
+                <div class="action-footer">
+                    <button class="glass-card exit-tile hover-glow" onclick="navigateTo('dashboard')">
+                        Exit 🏠
+                    </button>
                 </div>
             </div>
-
-            <div class="glass-card main-typing-box">
-                <div id="text-display" class="sentence-display"></div>
-                <div class="input-wrapper">
-                    <input type="text" id="typing-input" placeholder="Type and hit Enter to finish..." autocomplete="off">
-                </div>
-            </div>
-           <div class="exit-container">
-    <button class="glass-card exit-tile hover-glow" onclick="navigateTo('dashboard')">
-        Exit to Dashboard 🏠
-    </button>
-</div>
-        </div>
-    </main>
-
-    <div id="modal-overlay" class="modal hidden">
-        <div class="glass-card modal-box">
-            <h2>🏆 Performance Report</h2>
-            <div id="final-results" class="results-content"></div>
-            <div class="modal-footer">
-                <button class="btn-primary" onclick="resetTest()">Try Again</button>
-                <button class="btn-primary btn-alt" onclick="navigateTo('dashboard')">Dashboard</button>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script src="script.js"></script>
