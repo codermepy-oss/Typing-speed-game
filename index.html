@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeMaster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TypeMaster ⚡ | Precision Glass</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
-    <div id="bubbles" class="bubble-container"></div>
+    <div class="bubble-container" id="bubbles"></div>
 
     <audio id="key-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_731385a430.mp3"></audio>
     <audio id="success-sound" src="https://cdn.pixabay.com/audio/2021/08/04/audio_0625c1539c.mp3"></audio>
@@ -15,7 +15,8 @@
     <nav class="glass-nav">
         <div class="nav-content">
             <div class="logo-container">
-                <span class="logo-text">TypeMaster ⚡</span>
+                <span class="logo-text">TypeMaster</span>
+                <span class="logo-bolt">⚡</span>
             </div>
             <button id="theme-toggle" class="theme-btn-styled">☀️ Light Mode</button>
         </div>
@@ -24,32 +25,44 @@
     <div class="main-wrapper">
         <main id="dashboard" class="page active">
             <div class="hero-card glass-card">
-                <div class="hero-card glass-card">
-                    <div class="hero-emoji-top">🚀 ⌨️ 🎯</div>
-                        <p class="hero-sub color-adaptive">Next-Gen Typing</p>
-                        <h1 class="hero-title">TypeMaster</h1>
-                        <p class="hero-tagline color-adaptive">Elevate your speed!!!</p>
-                        <p class="hero-desc color-adaptive">Master the flow and track your precision in real-time. ✨</p>
-                        <button class="btn-primary" onclick="navigateTo('practice')">Start Practice ⚡</button>
-                    </div>
+                <div class="hero-emoji-top">🚀 ⌨️ 🎯</div>
+                <p class="hero-sub color-adaptive">Next-Gen Engine</p>
+                <h1 class="hero-title">TypeMaster</h1>
+                <p class="hero-tagline color-adaptive">Elevate your speed!!!</p>
+                <p class="hero-desc color-adaptive">Master the flow and track your precision in real-time. ✨</p>
+                <button class="btn-primary" onclick="navigateTo('practice')">Start Practice ⚡</button>
+            </div>
+        </main>
+
+        <main id="practice" class="page">
+            <div class="practice-layout">
+                <div class="stats-grid">
+                    <div class="glass-card stat-tile">
+                        <span class="label">⏱️ TIME</span>
+                        <span id="timer" class="value">0</span>
                     </div>
                     <div class="glass-card stat-tile">
-                        <span class="label">WPM</span>
+                        <span class="label">🚀 WPM</span>
                         <span id="wpm" class="value">0</span>
                     </div>
                     <div class="glass-card stat-tile">
-                        <span class="label">ACCURACY</span>
-                        <div class="acc-wrapper"><span id="accuracy" class="value">100</span><span class="unit">%</span></div>
+                        <span class="label">🎯 ACCURACY</span>
+                        <div class="acc-wrapper">
+                            <span id="accuracy" class="value">100</span>
+                            <span class="unit">%</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="glass-card main-typing-box">
                     <div id="text-display" class="sentence-display"></div>
-                    <input type="text" id="typing-input" placeholder="Type and hit Enter..." autocomplete="off">
+                    <input type="text" id="typing-input" placeholder="Type and hit Enter to finish..." autocomplete="off">
                 </div>
                 
                 <div class="exit-container">
-                    <button class="exit-tile" onclick="navigateTo('dashboard')">Exit to Dashboard 🏠</button>
+                    <button class="exit-tile" onclick="navigateTo('dashboard')">
+                        Exit to Dashboard 🏠
+                    </button>
                 </div>
             </div>
         </main>
@@ -57,11 +70,13 @@
 
     <div id="modal-overlay" class="modal hidden">
         <div class="glass-card modal-box">
-            <h2>🏆 Test Completed!</h2>
-            <div id="final-results"></div>
+            <h2 class="color-adaptive">🏆 Results</h2>
+            
+            <div id="final-results" class="modal-stats-container"></div>
+            
             <div class="modal-actions">
                 <button class="btn-primary" onclick="resetTest()">Try Again</button>
-                <button class="btn-primary" style="background:#444; color:white;" onclick="navigateTo('dashboard')">Home</button>
+                <button class="btn-primary" style="background: #444; color: white;" onclick="navigateTo('dashboard')">Home</button>
             </div>
         </div>
     </div>
