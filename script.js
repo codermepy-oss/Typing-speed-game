@@ -19,7 +19,6 @@ var sentences = [
 
 var timer, startTime, isRunning = false;
 
-// Page Navigation
 function navigateTo(id) {
     var pages = document.querySelectorAll('.page');
     for (var i = 0; i < pages.length; i++) {
@@ -27,32 +26,35 @@ function navigateTo(id) {
     }
     document.getElementById(id).classList.add('active');
     document.getElementById('modal-overlay').classList.add('hidden');
-    if (id === 'practice') startTest();
+    
+    if (id === 'practice') {
+        startTest(); // This generates the sentence
+    } else {
+        resetStats();
+    }
 }
 
-// Start Session
 function startTest() {
     resetStats();
     var text = sentences[Math.floor(Math.random() * sentences.length)];
     var display = document.getElementById('text-display');
+    
+    // Create spans for each letter
     var htmlContent = "";
     for (var i = 0; i < text.length; i++) {
         htmlContent += "<span>" + text[i] + "</span>";
     }
     display.innerHTML = htmlContent;
+    
     var input = document.getElementById('typing-input');
     input.value = "";
+    input.disabled = false;
     setTimeout(function() { input.focus(); }, 100);
 }
 
-// Typing Logic
 document.getElementById('typing-input').addEventListener('input', function(e) {
     if (!isRunning) startTimer();
     
-    // Play keystroke sound
-    var snd = document.getElementById('key-sound');
-    if (snd) { snd.currentTime = 0; snd.volume = 0.2; snd.play().catch(function(){}); }
-
     var val = e.target.value;
     var spans = document.getElementById('text-display').querySelectorAll('span');
     var errs = 0;
@@ -67,16 +69,13 @@ document.getElementById('typing-input').addEventListener('input', function(e) {
     var accuracy = val.length > 0 ? Math.floor(((val.length - errs) / val.length) * 100) : 100;
     document.getElementById('accuracy').innerText = accuracy;
     
-    // Auto-finish if perfectly correct
     if (val === document.getElementById('text-display').innerText) finish();
 });
 
-// NEW: FINISH ON ENTER KEY
+// POPUP ON ENTER
 document.getElementById('typing-input').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        if (isRunning || document.getElementById('typing-input').value.length > 0) {
-            finish();
-        }
+    if (e.key === 'Enter' && isRunning) {
+        finish();
     }
 });
 
@@ -95,7 +94,9 @@ function startTimer() {
 function finish() {
     clearInterval(timer);
     isRunning = false;
+    document.getElementById('typing-input').disabled = true;
 
+    // Sound
     var successSnd = document.getElementById('success-sound');
     if (successSnd) { successSnd.currentTime = 0; successSnd.play().catch(function(){}); }
     
@@ -103,10 +104,11 @@ function finish() {
     var acc = document.getElementById('accuracy').innerText;
     var time = document.getElementById('timer').innerText;
     
-    // We use "color-adaptive" here so the result text is visible in both modes
+    // Result Display
     document.getElementById('final-results').innerHTML = 
-        "<h3 class='result-wpm'>" + wpm + " WPM</h3>" +
-        "<p class='color-adaptive'>Time: " + time + "s | Accuracy: " + acc + "%</p>";
+        "<h3 class='result-value'>" + wpm + " WPM</h3>" +
+        "<h3 class='result-value' style='font-size:2rem;'>" + time + " Seconds</h3>" +
+        "<p class='modal-subtext color-adaptive'>Accuracy: " + acc + "%</p>";
     
     document.getElementById('modal-overlay').classList.remove('hidden');
 }
@@ -120,36 +122,3 @@ function resetStats() {
 }
 
 function resetTest() { navigateTo('practice'); }
-
-// Theme Toggle
-// Check for saved theme on load
-if (localStorage.getItem('theme') === 'light') {
-    document.body.classList.add('light-mode');
-    document.getElementById('theme-toggle').innerHTML = "🌙 Dark Mode";
-}
-// Theme Toggle logic
-var themeBtn = document.getElementById('theme-toggle');
-
-if (themeBtn) {
-    themeBtn.onclick = function() {
-        // Toggle the class on the body
-        var isLight = document.body.classList.toggle('light-mode');
-        
-        // Update the button text and emoji
-        if (isLight) {
-            themeBtn.innerHTML = "🌙 Dark Mode";
-        } else {
-            themeBtn.innerHTML = "☀️ Light Mode";
-        }
-    };
-}
-// Background Bubbles
-var container = document.getElementById('bubbles');
-for (var i = 0; i < 15; i++) {
-    var b = document.createElement('div');
-    b.className = 'bubble';
-    b.style.width = "40px"; b.style.height = "40px";
-    b.style.left = Math.random() * 100 + "vw";
-    b.style.top = Math.random() * 100 + "vh";
-    container.appendChild(b);
-}
