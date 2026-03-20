@@ -1,138 +1,87 @@
 :root {
     --accent: #2ecc71;
     --bg-dark: #050a05;
-    --text-bright: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
 }
 
 body.light-mode {
     --accent: #e67e22;
     --bg-dark: #f0f2f5;
-    --text-bright: #1a1a1b;
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(0, 0, 0, 0.1);
+    --glass: rgba(255, 255, 255, 0.7);
+    --border: rgba(0, 0, 0, 0.1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-body { background: var(--bg-dark); color: var(--text-bright); height: 100vh; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+body { background: var(--bg-dark); color: white; height: 100vh; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
 
 /* NAV */
-.glass-nav { padding: 15px 30px; background: var(--glass-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); z-index: 100; }
-.nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-.logo-text { font-size: 1.6rem; font-weight: 900; background: linear-gradient(45deg, var(--accent), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.theme-btn-styled { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-bright); padding: 8px 15px; border-radius: 10px; cursor: pointer; }
+.glass-nav { padding: 20px 5%; display: flex; justify-content: center; }
+.nav-content { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
+.logo-text { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+.theme-btn-styled { background: var(--glass); border: 1px solid var(--border); color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; }
+body.light-mode .theme-btn-styled { color: #000; }
 
 /* LAYOUT */
-.main-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; }
-.page { display: none; width: 100%; max-width: 900px; animation: fadeIn 0.4s ease; }
-.page.active { display: flex; flex-direction: column; align-items: center; }
+.main-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.page { display: none; width: 100%; max-width: 850px; flex-direction: column; align-items: center; }
+.page.active { display: flex; animation: fadeIn 0.4s ease; }
 
 /* GLASS CARDS */
-.glass-card { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
-.stat-tile { padding: 20px; text-align: center; }
-.value { font-size: 2rem; font-weight: 900; color: var(--accent); display: block; }
-.label { font-size: 0.7rem; font-weight: 700; opacity: 0.6; text-transform: uppercase; }
+.glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
 
-/* TYPING AREA */
-.main-typing-box { padding: 40px; width: 100%; min-height: 220px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
-.sentence-display { font-size: 1.6rem; line-height: 1.5; margin-bottom: 25px; color: rgba(255,255,255,0.3); }
-.sentence-display span.correct { color: var(--accent) !important; text-shadow: 0 0 10px var(--accent); }
-.sentence-display span.incorrect { color: #ff4757 !important; background: rgba(255, 71, 87, 0.2); border-radius: 4px; }
-#typing-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 12px; padding: 15px; color: var(--text-bright); text-align: center; outline: none; font-size: 1.2rem; }
+/* DASHBOARD */
+.hero-card { padding: 60px 40px; text-align: center; width: 100%; }
+.hero-title { font-size: 5rem; font-weight: 900; color: var(--accent); margin: 10px 0; }
+.hero-tagline { font-size: 1.5rem; font-weight: 600; margin-bottom: 20px; }
+.hero-desc { opacity: 0.7; max-width: 500px; margin: 0 auto 30px; }
 
-/* EXIT TILE */
-.exit-container { width: 100%; display: flex; justify-content: center; margin-top: 20px; }
-.exit-tile { padding: 12px 35px; border-radius: 15px; cursor: pointer; font-weight: 700; color: #ffffff !important; background: rgba(255, 255, 255, 0.1) !important; border: 1px solid var(--glass-border); }
-.hover-glow:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3); }
+/* PRACTICE */
+.practice-layout { width: 100%; display: flex; flex-direction: column; gap: 20px; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
+.stat-tile { padding: 30px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 140px; }
+.value { font-size: 2.8rem; font-weight: 900; color: var(--accent); }
+.label { font-size: 0.7rem; font-weight: 800; opacity: 0.6; margin-top: 5px; }
 
-/* MODAL & SUCCESS */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(10px); }
+.main-typing-box { padding: 50px 40px; text-align: center; }
+.sentence-display { font-size: 1.8rem; margin-bottom: 30px; color: rgba(255,255,255,0.3); min-height: 1.5em; }
+.sentence-display span.correct { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.sentence-display span.incorrect { color: #ff4757; background: rgba(255, 71, 87, 0.2); border-radius: 4px; }
+
+#typing-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 15px; padding: 18px; color: white; text-align: center; font-size: 1.1rem; outline: none; }
+
+/* BUTTONS */
+.btn-primary { background: var(--accent); color: #050a05; padding: 15px 40px; border-radius: 15px; border: none; font-weight: 800; cursor: pointer; transition: 0.3s; }
+.btn-primary:hover { transform: scale(1.05); filter: brightness(1.1); }
+.exit-tile { background: rgba(255,255,255,0.1) !important; border: 1px solid var(--border); padding: 12px 35px; border-radius: 50px; color: white !important; font-weight: 700; cursor: pointer; margin: 0 auto; display: block; }
+
+/* MODAL */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(10px); }
 .modal-box { padding: 40px; text-align: center; max-width: 400px; width: 90%; }
 .hidden { display: none !important; }
-.result-wpm { font-size: 3.5rem; color: var(--accent); font-weight: 900; margin: 10px 0; }
-.modal-actions { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
-.btn-alt { background: rgba(255,255,255,0.1) !important; color: white !important; }
+.result-wpm { font-size: 4rem; color: var(--accent); font-weight: 900; margin: 15px 0; }
+.btn-alt { background: rgba(255,255,255,0.1) !important; color: white !important; margin-left: 10px; }
 
-/* HERO */
-.gradient-text { font-size: 3.5rem; font-weight: 900; background: linear-gradient(45deg, var(--accent), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.btn-primary { background: var(--accent); color: #000; padding: 15px 35px; border-radius: 12px; border: none; font-weight: 800; cursor: pointer; font-size: 1rem; }
-.pulse { animation: pulse-anim 2s infinite; }
-
-/* RESPONSIVE */
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
-    .gradient-text { font-size: 2.5rem; }
-    .main-typing-box { padding: 25px; }
-    .sentence-display { font-size: 1.2rem; }
-    .stat-tile .value { font-size: 1.4rem; }
+    .hero-title { font-size: 3.5rem; }
+    .stats-grid { gap: 10px; }
+    .stat-tile { padding: 20px 5px; min-height: 110px; }
+    .value { font-size: 1.8rem; }
+    .sentence-display { font-size: 1.3rem; }
+}
+
+@media (max-width: 480px) {
+    body { overflow-y: auto; }
+    .main-wrapper { align-items: flex-start; padding-top: 40px; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2.8rem; }
+    .main-typing-box { padding: 30px 15px; }
 }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes pulse-anim { 0% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(46, 204, 113, 0); } }
 
 /* BUBBLES */
 .bubble-container { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
 .bubble { position: absolute; background: var(--accent); opacity: 0.05; border-radius: 50%; animation: float 15s infinite ease-in-out; }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-40px); } }
-
-/* --- THE ALIGNMENT & VISIBILITY FIXES --- */
-
-/* Centers the entire content block in the middle of the screen */
-.main-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    width: 100%;
-    padding: 20px;
-}
-
-/* Forces all stats tiles to be the exact same height and center their content */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 100%;
-}
-
-.stat-tile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 25px 10px;
-    min-height: 120px; /* Prevents jagginess */
-}
-
-/* Fixes the "Exit" button looks and centering */
-.exit-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.exit-tile {
-    min-width: 240px;
-    padding: 14px 30px;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50px;
-    color: #ffffff !important; /* Visible text */
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Fixes the typing box layout */
-.main-typing-box {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 30px;
-    margin-top: 20px;
-}
+@keyframes float { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-40px) translateX(20px); } }
