@@ -1,134 +1,51 @@
-/* --- THEME SYSTEM --- */
-body.dark-mode {
-    --bg: #050a05; --accent: #2ecc71; --text: #ffffff;
-    --glass: rgba(255, 255, 255, 0.05); --glass-border: rgba(255, 255, 255, 0.1);
-    --sub-text: rgba(255, 255, 255, 0.6);
-}
-body.light-mode {
-    --bg: #f8f9fa; --accent: #f39c12; --text: #2c3e50;
-    --glass: rgba(0, 0, 0, 0.03); --glass-border: rgba(0, 0, 0, 0.08);
-    --sub-text: rgba(0, 0, 0, 0.5);
-}
+/* --- [KEEP ALL YOUR PREVIOUS CSS FROM THE LAST STEP] --- */
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; transition: 0.3s ease; }
-body { background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
+/* --- RESPONSIVE ENGINE --- */
 
-/* --- NAV & LOGO --- */
-.glass-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 60px; z-index: 100;
-}
-.logo-text {
-    font-size: 1.8rem; font-weight: 900;
-    background: linear-gradient(45deg, var(--accent), #fff);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.theme-btn-styled {
-    background: var(--glass); backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border); color: var(--text);
-    padding: 10px 20px; border-radius: 14px; cursor: pointer; font-weight: 700;
-}
-
-/* --- DASHBOARD HERO --- */
-.hero-container { display: flex; justify-content: center; align-items: center; height: 80vh; }
-.hero-card { padding: 50px; text-align: center; max-width: 650px; }
-.hero-emoji-top { font-size: 2rem; margin-bottom: 10px; letter-spacing: 10px; }
-.gradient-text {
-    font-size: 4rem; font-weight: 900; background: linear-gradient(to right, var(--accent), #fff, var(--accent));
-    background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    animation: shine 3s linear infinite;
-}
-@keyframes shine { to { background-position: 200% center; } }
-
-/* --- GLASS TILES --- */
-.glass-card { 
-    background: var(--glass); backdrop-filter: blur(16px); 
-    border: 1px solid var(--glass-border); border-radius: 28px; 
-}
-.stat-tile { padding: 25px; text-align: center; transition: 0.4s; }
-.hover-glow:hover {
-    transform: translateY(-8px); border-color: var(--accent);
-    box-shadow: 0 10px 30px rgba(46, 204, 113, 0.2);
-}
-.tile-icon { font-size: 1.5rem; display: block; margin-bottom: 5px; }
-.label { font-size: 0.7rem; letter-spacing: 1px; color: var(--sub-text); font-weight: 700; }
-.value { font-size: 2.2rem; font-weight: 900; color: var(--accent); display: block; }
-
-/* --- PRACTICE LAYOUT --- */
-.page { display: none; height: 100%; width: 100%; align-items: center; justify-content: center; flex-direction: column; }
-.page.active { display: flex; }
-.practice-container { width: 90%; max-width: 850px; display: flex; flex-direction: column; gap: 24px; }
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-
-.main-typing-box { padding: 40px; text-align: center; }
-.sentence-display { font-size: 1.8rem; margin-bottom: 25px; line-height: 1.4; }
-#typing-input {
-    width: 100%; background: rgba(255,255,255,0.05); border: 2px solid var(--glass-border);
-    border-radius: 16px; padding: 15px; color: var(--text); font-size: 1.2rem; text-align: center; outline: none;
-}
-
-/* --- HIGHLIGHTING --- */
-.correct { color: var(--accent) !important; text-shadow: 0 0 8px var(--accent); }
-.incorrect { color: #ff4757 !important; text-decoration: underline; background: rgba(255, 71, 87, 0.1); }
-
-/* --- BUTTONS --- */
-.btn-primary { 
-    background: var(--accent); color: #000; padding: 16px 40px; border-radius: 18px; 
-    border: none; font-weight: 900; cursor: pointer; margin-top: 20px;
-}
-.pulse { animation: pulse-animation 2s infinite; }
-@keyframes pulse-animation {
-    0% { box-shadow: 0 0 0 0px rgba(46, 204, 113, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(46, 204, 113, 0); }
-}
-
-/* --- MODAL --- */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(10px); }
-.modal-box { padding: 40px; text-align: center; max-width: 450px; width: 90%; }
-.hidden { display: none !important; }
-
-/* --- BUBBLES --- */
-.bubble-container { position: fixed; inset: 0; z-index: -1; }
-.bubble { position: absolute; background: var(--accent); opacity: 0.1; border-radius: 50%; animation: float 15s infinite ease-in-out; }
-@keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(40px, -40px); } }
-/* Add this at the end of style.css */
-.exit-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-/* --- UPDATED EXIT BUTTON TILE --- */
-.exit-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 40px; 
-    padding-bottom: 50px; 
-}
-
-.exit-tile {
-    /* Brighter glass to stand out against bubbles */
-    background: rgba(255, 255, 255, 0.1) !important; 
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: 15px 40px;
+/* Tablet & Smaller Screens */
+@media (max-width: 768px) {
+    .nav-content { padding: 0 10px; }
+    .logo-text { font-size: 1.4rem; }
     
-    /* FIX: Make text bright white and visible */
-    color: #ffffff !important; 
-    font-size: 1.1rem;
-    font-weight: 700;
-    
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    .gradient-text { font-size: 2.8rem; }
+    .hero-card { padding: 30px 20px; width: 95%; }
+
+    .stats-grid { gap: 10px; }
+    .stat-tile { padding: 15px 5px; }
+    .stat-tile .value { font-size: 1.5rem; }
+    .stat-tile .label { font-size: 0.6rem; }
+
+    .main-typing-box { padding: 30px 20px; min-height: 200px; }
+    .sentence-display { font-size: 1.3rem; }
 }
 
-.exit-tile:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.2) !important;
-    border-color: #2ecc71; /* Matches your green accent */
-    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+/* Mobile Phones (Portrait) */
+@media (max-width: 480px) {
+    .glass-nav { padding: 15px 20px; }
+    
+    .main-wrapper { padding: 10px; align-items: flex-start; margin-top: 20px; }
+
+    .gradient-text { font-size: 2.2rem; }
+    .hero-desc { font-size: 0.9rem; }
+    
+    /* Stack stats vertically on very small phones if needed, 
+       but here we keep them in 3 cols with smaller text */
+    .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    
+    .tile-icon { font-size: 1.1rem; }
+    .stat-tile .value { font-size: 1.2rem; }
+
+    .sentence-display { font-size: 1.1rem; margin-bottom: 20px; }
+    #typing-input { font-size: 1rem; padding: 12px; }
+
+    .exit-tile { width: 100%; font-size: 0.9rem; }
+    
+    .mobile-break { display: block; }
+}
+
+/* Landscape Mode Fix */
+@media (max-height: 500px) {
+    .main-wrapper { align-items: flex-start; overflow-y: auto; }
+    .hero-card { padding: 20px; }
+    .bubble-container { display: none; } /* Hide bubbles to save CPU on mobile landscape */
 }
