@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeMaster | Glass Edition</title>
+    <title>TypeMaster | Pro Typing</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-mode">
     <div class="bubble-container" id="bubbles"></div>
 
-    <audio id="key-sound" src="https://www.soundjay.com/communication/typewriter-key-1.mp3"></audio>
-    <audio id="success-sound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+    <audio id="key-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_731385a430.mp3"></audio>
+    <audio id="success-sound" src="https://cdn.pixabay.com/audio/2021/08/04/audio_0625c1539c.mp3"></audio>
 
     <nav class="glass-nav">
         <div class="logo-container">
@@ -40,7 +40,9 @@
             </div>
             <div class="glass-card main-typing-box">
                 <div id="text-display" class="sentence-display"></div>
-                <input type="text" id="typing-input" placeholder="Type here and press Enter to finish..." autocomplete="off">
+                <div class="input-wrapper">
+                    <input type="text" id="typing-input" placeholder="Type here and press Enter to finish..." autocomplete="off">
+                </div>
             </div>
             <button class="btn-ghost" onclick="navigateTo('dashboard')">Exit to Dashboard</button>
         </div>
