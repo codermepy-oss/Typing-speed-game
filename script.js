@@ -17,7 +17,6 @@ var sentences = [
     "Writing neatly and clearly makes your work easier to read."
 ];
 var timer, startTime, isRunning = false;
-
 // --- 2. THEME TOGGLE (FIXED) ---
 function initTheme() {
     var themeBtn = document.getElementById('theme-toggle');
