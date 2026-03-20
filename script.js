@@ -96,18 +96,27 @@ function finish() {
     clearInterval(timer);
     isRunning = false;
 
-    // Play success sound
+    // 1. PLAY SUCCESS SOUND
     var successSnd = document.getElementById('success-sound');
-    if (successSnd) { 
-        successSnd.currentTime = 0; 
-        successSnd.play().catch(function(){}); 
+    if (successSnd) {
+        successSnd.currentTime = 0;
+        successSnd.play().catch(function(e) { console.log("Sound blocked"); });
     }
     
+    // 2. GET FINAL DATA
     var wpm = document.getElementById('wpm').innerText;
     var acc = document.getElementById('accuracy').innerText;
+    var timeTaken = document.getElementById('timer').innerText;
     
-    // Show results
-    document.getElementById('final-results').innerHTML = "<h3>" + wpm + " WPM</h3><p>Accuracy: " + acc + "%</p>";
+    // 3. UPDATE MODAL (Ensuring same font classes)
+    var resultsArea = document.getElementById('final-results');
+    resultsArea.innerHTML = 
+        "<div class='modal-stats-container'>" +
+            "<h3 class='result-value'>" + wpm + " WPM</h3>" +
+            "<h3 class='result-value'>" + timeTaken + " Seconds</h3>" +
+            "<p class='result-accuracy'>Accuracy: " + acc + "%</p>" +
+        "</div>";
+    
     document.getElementById('modal-overlay').classList.remove('hidden');
 }
 
