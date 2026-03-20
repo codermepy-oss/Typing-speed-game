@@ -1,7 +1,7 @@
 const sentences = [
     "Precision is the key to mastering the art of typing fast.",
     "The glowing interface responded instantly to every single stroke.",
-    "A journey of exploration begins with a curious mind and steady hands.",
+    "A journey of exploration begins with a curious mind.",
     "Modern web interfaces prioritize beauty as much as functionality.",
     "Learning to type quickly requires focus and regular practice.",
     "She opened the window to let the fresh morning air in.",
@@ -16,8 +16,9 @@ const sentences = [
 ];
 
 let timer, startTime, isRunning = false;
+let currentErrors = 0;
 
-// Theme Toggle Fix
+// Theme Toggle
 document.getElementById('theme-toggle').addEventListener('click', () => {
     const isDark = document.body.classList.toggle('dark-mode');
     document.body.classList.toggle('light-mode', !isDark);
@@ -34,6 +35,7 @@ function navigateTo(id) {
 function startTest() {
     resetStats();
     const text = sentences[Math.floor(Math.random() * sentences.length)];
+    // Character wrapping for precise highlighting
     document.getElementById('text-display').innerHTML = text.split('').map(c => `<span>${c}</span>`).join('');
     const input = document.getElementById('typing-input');
     input.value = "";
@@ -43,24 +45,43 @@ function startTest() {
 document.getElementById('typing-input').addEventListener('input', (e) => {
     if (!isRunning) startTimer();
     
-    // Play Click
+    // Play Click Sound
     const snd = document.getElementById('key-sound');
     snd.currentTime = 0; snd.volume = 0.2; snd.play();
 
     const val = e.target.value;
     const spans = document.getElementById('text-display').querySelectorAll('span');
-    let errs = 0;
+    const targetText = document.getElementById('text-display').innerText;
+    
+    currentErrors = 0;
 
+    // Real-time Letter-by-Letter Highlighting
     spans.forEach((span, i) => {
-        if (!val[i]) span.className = '';
-        else if (val[i] === span.innerText) span.className = 'correct';
-        else { span.className = 'incorrect'; errs++; }
+        const char = val[i];
+        if (char == null) {
+            span.className = ''; // Not typed yet
+        } else if (char === span.innerText) {
+            span.className = 'correct'; // Typed correctly
+        } else {
+            span.className = 'incorrect'; // Mistake made
+            currentErrors++;
+        }
     });
 
-    const acc = val.length ? Math.max(0, Math.floor(((val.length - errs) / val.length) * 100)) : 100;
-    document.getElementById('accuracy').innerText = acc;
+    // Real-time Accuracy Calculation
+    const totalTyped = val.length;
+    const accuracy = totalTyped > 0 ? Math.max(0, Math.floor(((totalTyped - currentErrors) / totalTyped) * 100)) : 100;
+    document.getElementById('accuracy').innerText = accuracy;
 
-    if (val === document.getElementById('text-display').innerText) finish();
+    // Auto-finish only if text is perfect and complete
+    if (val === targetText) finish();
+});
+
+// Force finish on Enter (Accurate snapshot)
+document.getElementById('typing-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        if (isRunning) finish();
+    }
 });
 
 function startTimer() {
@@ -69,8 +90,11 @@ function startTimer() {
     timer = setInterval(() => {
         const sec = Math.floor((Date.now() - startTime) / 1000);
         document.getElementById('timer').innerText = sec;
-        const wpm = Math.floor((document.getElementById('typing-input').value.length / 5) / (sec / 60));
-        document.getElementById('wpm').innerText = sec > 0 ? wpm : 0;
+        
+        // WPM Calculation based on 5-character word average
+        const chars = document.getElementById('typing-input').value.length;
+        const wpm = sec > 0 ? Math.floor((chars / 5) / (sec / 60)) : 0;
+        document.getElementById('wpm').innerText = wpm;
     }, 1000);
 }
 
@@ -79,9 +103,16 @@ function finish() {
     isRunning = false;
     document.getElementById('success-sound').play();
     
+    const finalWpm = document.getElementById('wpm').innerText;
+    const finalAcc = document.getElementById('accuracy').innerText;
+    const finalTime = document.getElementById('timer').innerText;
+
     document.getElementById('final-results').innerHTML = `
-        <h3 style="font-size: 2rem; color: var(--accent);">${document.getElementById('wpm').innerText} WPM</h3>
-        <p>with ${document.getElementById('accuracy').innerText}% accuracy</p>
+        <div class="result-item">
+            <h3 style="font-size: 2.5rem; color: var(--accent);">${finalWpm} WPM</h3>
+            <p style="color: var(--sub-text);">Accuracy: ${finalAcc}%</p>
+            <p style="color: var(--sub-text);">Time: ${finalTime} seconds</p>
+        </div>
     `;
     document.getElementById('modal-overlay').classList.remove('hidden');
 }
@@ -89,6 +120,7 @@ function finish() {
 function resetStats() {
     clearInterval(timer);
     isRunning = false;
+    currentErrors = 0;
     document.getElementById('timer').innerText = "0";
     document.getElementById('wpm').innerText = "0";
     document.getElementById('accuracy').innerText = "100";
@@ -98,14 +130,18 @@ function resetTest() {
     navigateTo('practice');
 }
 
-// Init Bubbles
-const container = document.getElementById('bubbles');
-for (let i = 0; i < 15; i++) {
-    const b = document.createElement('div');
-    b.className = 'bubble';
-    const s = Math.random() * 100 + 40 + 'px';
-    b.style.width = s; b.style.height = s;
-    b.style.left = Math.random() * 100 + 'vw';
-    b.style.top = Math.random() * 100 + 'vh';
-    container.appendChild(b);
+// Init Animated Bubbles
+function createBubbles() {
+    const container = document.getElementById('bubbles');
+    for (let i = 0; i < 12; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const s = Math.random() * 80 + 40 + 'px';
+        b.style.width = s; b.style.height = s;
+        b.style.left = Math.random() * 100 + 'vw';
+        b.style.top = Math.random() * 100 + 'vh';
+        b.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(b);
+    }
 }
+createBubbles();
