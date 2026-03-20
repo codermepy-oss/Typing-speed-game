@@ -16,9 +16,7 @@ var sentences = [
     "The children laughed and played in the sunlit garden.",
     "Writing neatly and clearly makes your work easier to read."
 ];
-
 var timer, startTime, isRunning = false;
-
 function navigateTo(id) {
     var pages = document.querySelectorAll('.page');
     for (var i = 0; i < pages.length; i++) {
